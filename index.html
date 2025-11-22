@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Errandz on Wheels - Quick Order & Professional Dispatch</title>
+    <!-- Load Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind Configuration and Custom CSS -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-purple': '#3A0064', // Deep Violet/Purple (Brand Main)
+                        'accent-gold': '#FFC72C',   // Bright Gold/Yellow (Brand Accent)
+                        'text-dark': '#1F0033',     // Very dark text for high contrast
+                        'light-bg': '#F9FAFB',      // Clean light gray background
+                        'whatsapp-green': '#25D366', // Standard WhatsApp Green
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom styles that act as your style.css */
+        html {
+            scroll-behavior: smooth;
+        }
+        /* Professional Underline Style for Headings */
+        .section-heading-professional {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 0.5rem;
+        }
+        .section-heading-professional::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+            width: 40px; 
+            height: 4px;
+            background-color: #FFC72C;
+            border-radius: 2px;
+        }
+        /* Style for the floating WhatsApp button */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25D366; /* WhatsApp Green */
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease-in-out;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+        /* SVG icon for WhatsApp */
+        .whatsapp-icon {
+            width: 30px;
+            height: 30px;
+            fill: white;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+</head>
+<body class="bg-white text-text-dark font-sans antialiased">
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/2347030437644?text=Hello%20Errandz%20on%20Wheels,%20I%20have%20an%20enquiry%20about%20your%20dispatch%20services." class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+        <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C6.477 2 2 6.477 2 12c0 1.761.46 3.44.898 4.974l-1.396 4.912 5.062-1.353c1.47.404 3.036.619 4.418.619h.001c5.504 0 9.982-4.478 9.982-9.982S17.504 2 12 2zm3.332 12.06c-.247.483-.902.736-1.608.736-.358 0-.525-.109-1.077-.332-.552-.222-2.553-1.268-2.94-1.408-.387-.139-.678-.209-.968.209-.289.418-1.121 1.408-.921 1.599.199.191.406.463.64.686.234.223.472.486.766.726.294.24.605.46.931.589.326.129.674.19.98.19.338 0 .666-.063.965-.204.298-.14.793-.448 1.608-1.117.815-.669 1.357-1.708 1.608-2.127.251-.418.251-.775.174-.902-.077-.127-.291-.209-.533-.335-.242-.126-.558-.221-.839-.259-.281-.038-.592-.046-.774.223-.182.269-.678.898-.881 1.134-.202.237-.403.264-.766.109-.363-.155-.892-.326-1.708-1.049-.816-.723-1.357-1.63-1.538-1.956-.182-.326-.007-.504.162-.705.169-.201.381-.47.551-.676.169-.206.231-.385.337-.607.106-.222.05-.41-.037-.565-.087-.156-.774-.492-.968-.736-.194-.244-.33-.298-.559-.298-.229 0-.48-.018-.727-.018-.247 0-.65-.109-.882.387-.233.275-.889.873-.889 2.155 0 1.27.904 2.476 1.034 2.66.13.184 1.782 2.822 4.341 4.07 2.558 1.248 2.558 1.109 3.003 1.033.444-.076 1.432-.585 1.653-1.157.221-.572.221-1.056.147-1.149-.074-.093-.289-.146-.53-.259z" clip-rule="evenodd"/></svg>
+    </a>
+
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-50 bg-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-extrabold tracking-tight text-text-dark">
+                <span class="text-primary-purple">Errandz</span><span class="text-accent-gold">.</span>
+            </a>
+
+            <!-- Desktop Navigation Links -->
+            <nav class="hidden md:flex space-x-8 font-medium">
+                <a href="#services" class="text-text-dark hover:text-primary-purple transition duration-200">Services</a>
+                <a href="#pricing" class="text-text-dark hover:text-primary-purple transition duration-200">Pricing</a>
+                <a href="#order" class="text-text-dark hover:text-primary-purple transition duration-200">Order Now</a>
+                <a href="tel:+2347030437644" class="bg-primary-purple text-white px-5 py-2 rounded-lg font-bold hover:bg-text-dark transition duration-200 shadow-md">Call Us</a>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <button id="menu-button" class="md:hidden p-2 rounded-lg text-primary-purple focus:outline-none focus:ring-2 focus:ring-primary-purple" aria-label="Toggle menu">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+        </div>
+
+        <!-- Mobile Menu (Dropdown) -->
+        <nav id="mobile-menu" class="hidden md:hidden absolute w-full bg-white shadow-xl pb-4">
+            <div class="flex flex-col space-y-2 px-4 pt-2">
+                <a href="#services" class="text-text-dark hover:bg-light-bg p-2 rounded-md transition duration-200">Services</a>
+                <a href="#pricing" class="text-text-dark hover:bg-light-bg p-2 rounded-md transition duration-200">Pricing Zones</a>
+                <a href="#order" class="text-text-dark hover:bg-light-bg p-2 rounded-md transition duration-200">Quick Order</a>
+                <a href="tel:+2347030437644" class="text-center mt-2 bg-accent-gold text-text-dark px-4 py-2 rounded-lg font-bold hover:bg-yellow-400 transition duration-200">Call to Book</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="py-20 md:py-32 bg-light-bg">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <span class="inline-block bg-accent-gold text-primary-purple text-sm font-semibold px-3 py-1 rounded-full mb-3">#FastAndReliable</span>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-4 leading-tight text-primary-purple">
+                        Your Trusted Partner for <span class="text-accent-gold">Logistics</span> and Errands in Ibadan.
+                    </h1>
+                    <p class="text-lg text-gray-600 mb-8 max-w-xl">
+                        Errandz on Wheels provides swift, professional dispatch and comprehensive errand running services tailored for individuals and corporates.
+                    </p>
+                    <a href="#order" class="inline-block bg-primary-purple text-white px-8 py-3 text-lg font-bold rounded-lg hover:bg-text-dark transition duration-300 shadow-xl transform hover:scale-105">
+                        Place a Quick Order
+                    </a>
+                </div>
+                
+                <div class="flex justify-center md:justify-end">
+                    <div class="relative w-full max-w-md min-h-[20rem] md:min-h-[24rem] bg-primary-purple/10 rounded-xl flex items-center justify-center shadow-2xl">
+                        <span class="text-8xl text-primary-purple/30">🛵</span>
+                        <div class="absolute bottom-4 right-4 bg-accent-gold text-primary-purple px-4 py-1.5 font-bold rounded-full text-sm shadow-md">
+                            Jirola Dispatch
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Breakdown Section -->
+        <section id="services" class="py-16 md:py-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl sm:text-4xl font-extrabold mb-12 text-center text-text-dark section-heading-professional">Our Core Services</h2>
+                
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Dispatch -->
+                    <div class="p-8 bg-white rounded-xl shadow-lg border-t-4 border-primary-purple hover:shadow-xl transition duration-300">
+                        <div class="text-4xl text-primary-purple mb-4">📦</div>
+                        <h3 class="text-xl font-bold mb-3 text-text-dark">Dispatch & Delivery</h3>
+                        <ul class="text-gray-600 list-none space-y-2 text-sm">
+                            <li class="flex items-start"><span class="mr-2 text-accent-gold">✓</span> Local (Same Axis) & Inter-Axis Deliveries</li>
+                            <li class="flex items-start"><span class="mr-2 text-accent-gold">✓</span> Guaranteed Express Delivery Options</li>
+                            <li class="flex items-start"><span class="mr-2 text-accent-gold">✓</span> Secure Handling of All Packages</li>
+                        </ul>
+                        <p class="mt-4 font-semibold text-primary-purple">Starting from ₦1,000</p>
+                    </div>
+
+                    <!-- Errands -->
+                    <div class="p-8 bg-white rounded-xl shadow-lg border-t-4 border-accent-gold hover:shadow-xl transition duration-300">
+                        <div class="text-4xl text-accent-gold mb-4">🛍️</div>
+                        <h3 class="text-xl font-bold mb-3 text-text-dark">Personal & Corporate Errands</h3>
+                        <ul class="text-gray-600 list-none space-y-2 text-sm">
+                            <li class="flex items-start"><span class="mr-2 text-primary-purple">✓</span> Market Runs & Pharmacy Pick-Up</li>
+                            <li class="flex items-start"><span class="mr-2 text-primary-purple">✓</span> Dedicated Personal Assistants for Tasks</li>
+                            <li class="flex items-start"><span class="mr-2 text-primary-purple">✓</span> Confidential Corporate Document Handling</li>
+                        </ul>
+                        <p class="mt-4 font-semibold text-primary-purple">Starting from ₦2,000</p>
+                    </div>
+
+                    <!-- Logistics -->
+                    <div class="p-8 bg-white rounded-xl shadow-lg border-t-4 border-text-dark hover:shadow-xl transition duration-300">
+                        <div class="text-4xl text-text-dark mb-4">✈️</div>
+                        <h3 class="text-xl font-bold mb-3 text-text-dark">Specialized Logistics</h3>
+                        <ul class="text-gray-600 list-none space-y-2 text-sm">
+                            <li class="flex items-start"><span class="mr-2 text-accent-gold">✓</span> Export Services (DHL, UPS, CARGO)</li>
+                            <li class="flex items-start"><span class="mr-2 text-accent-gold">✓</span> Pónmó/Protein Bulk Shipment</li>
+                            <li class="flex items-start"><span class="mr-2 text-accent-gold">✓</span> Sales of 18k to 24k Karat Jewelries</li>
+                        </ul>
+                        <p class="mt-4 font-semibold text-primary-purple">Request a Quote</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Pricing Zones Section -->
+        <section id="pricing" class="py-16 md:py-24 bg-light-bg">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl sm:text-4xl font-extrabold mb-12 text-center text-text-dark section-heading-professional">Pricing & Zone Details</h2>
+
+                <div class="bg-white p-6 sm:p-10 rounded-xl shadow-2xl border-t-4 border-accent-gold">
+                    <h3 class="text-2xl font-bold mb-6 text-primary-purple">Ibadan Dispatch Rates</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left">
+                            <thead class="bg-primary-purple text-white">
+                                <tr>
+                                    <th class="py-3 px-4 text-sm font-semibold uppercase rounded-tl-lg">Route/Service</th>
+                                    <th class="py-3 px-4 text-sm font-semibold uppercase text-right rounded-tr-lg">Rate (₦)</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200 text-gray-700">
+                                <tr class="hover:bg-gray-50">
+                                    <td class="py-3 px-4 font-medium">Within Same Axis (General)</td>
+                                    <td class="py-3 px-4 text-right">₦1,500 – 2,500</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="py-3 px-4 font-medium">UI - Bodija - Akobo Zone</td>
+                                    <td class="py-3 px-4 text-right">₦1,800</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="py-3 px-4 font-medium">Challenge - Ring Road - Jericho</td>
+                                    <td class="py-3 px-4 text-right">₦2,500</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="py-3 px-4 font-medium">Dugbe - Mokola - Sango - Iwo Road</td>
+                                    <td class="py-3 px-4 text-right">₦2,000</td>
+                                </tr>
+                                <tr class="bg-primary-purple/5">
+                                    <td class="py-3 px-4 font-bold text-primary-purple">Express Delivery</td>
+                                    <td class="py-3 px-4 text-right font-bold text-primary-purple">₦1,000 – 1,500</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3 class="text-xl font-bold mt-8 mb-4 text-primary-purple">Add-Ons & Errand Extras</h3>
+                    <ul class="list-none space-y-2 text-gray-700">
+                        <li class="flex justify-between border-b pb-2">
+                            <span class="font-medium">Market Runs</span>
+                            <span class="text-accent-gold font-semibold">₦3,500 – 7,000</span>
+                        </li>
+                        <li class="flex justify-between border-b pb-2">
+                            <span class="font-medium">Waiting Time</span>
+                            <span class="text-accent-gold font-semibold">₦500 per 10 mins</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span class="font-medium">Extra Stop Fee</span>
+                            <span class="text-accent-gold font-semibold">₦1,000 – 2,000</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Order Form Section -->
+        <section id="order" class="py-16 md:py-24">
+            <div class="max-w-xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl sm:text-4xl font-extrabold mb-6 text-center text-text-dark section-heading-professional">Quick Order via WhatsApp</h2>
+                <p class="text-center text-gray-600 mb-8">Fill out the details below and we will automatically generate a WhatsApp message to our dispatch line.</p>
+
+                <form id="order-form" class="bg-light-bg p-6 sm:p-8 rounded-xl shadow-2xl border-t-4 border-primary-purple">
+                    <div class="space-y-4">
+                        <!-- Name and Phone -->
+                        <div class="grid sm:grid-cols-2 gap-4">
+                            <div>
+                                <label for="customer_name" class="block text-sm font-medium text-gray-700">Your Full Name (Required)</label>
+                                <input type="text" id="customer_name" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 border focus:border-accent-gold focus:ring focus:ring-accent-gold/50">
+                            </div>
+                            <div>
+                                <label for="phone_number" class="block text-sm font-medium text-gray-700">Your Phone Number (Required)</label>
+                                <input type="tel" id="phone_number" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 border focus:border-accent-gold focus:ring focus:ring-accent-gold/50">
+                            </div>
+                        </div>
+
+                        <!-- Locations -->
+                        <div>
+                            <label for="pickup_location" class="block text-sm font-medium text-gray-700">Pickup Location (Required)</label>
+                            <input type="text" id="pickup_location" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 border focus:border-accent-gold focus:ring focus:ring-accent-gold/50">
+                        </div>
+                        <div>
+                            <label for="dropoff_location" class="block text-sm font-medium text-gray-700">Drop-off Location (Required)</label>
+                            <input type="text" id="dropoff_location" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 border focus:border-accent-gold focus:ring focus:ring-accent-gold/50">
+                        </div>
+
+                        <!-- Description -->
+                        <div>
+                            <label for="item_description" class="block text-sm font-medium text-gray-700">Item Description / Service Needed (Required)</label>
+                            <textarea id="item_description" rows="3" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 border focus:border-accent-gold focus:ring focus:ring-accent-gold/50"></textarea>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="w-full mt-6 flex items-center justify-center space-x-2 bg-accent-gold text-text-dark px-8 py-3 text-lg font-bold rounded-lg hover:bg-yellow-400 transition duration-300 shadow-lg">
+                        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12.047 2.007c-5.504 0-9.982 4.478-9.982 9.982 0 1.761.46 3.44.898 4.974l-1.396 4.912 5.062-1.353c1.47.404 3.036.619 4.418.619h.001c5.504 0 9.982-4.478 9.982-9.982s-4.478-9.982-9.982-9.982zm4.498 12.378c-.254.496-.922.754-1.637.754-.367 0-.54-.112-1.096-.34-.556-.228-2.607-1.298-3.003-1.44-.395-.142-.69-.214-.986.214-.296.429-1.144 1.44-.946 1.637.197.196.417.473.655.704.238.238.486.495.782.743.3.248.618.473.955.602.337.13.7.195 1.05.195.347 0 .684-.065.99-.215.305-.15.81-.46 1.637-1.144.827-.684 1.383-1.745 1.637-2.174.254-.429.254-.79.177-.922-.078-.13-.296-.214-.54-.343-.244-.13-.57-.228-.853-.267-.283-.038-.609-.047-.79.23-.18.277-.69.922-.898 1.16-.207.237-.417.267-.782.112-.365-.15-.91-.334-1.737-1.076-.827-.742-1.383-1.666-1.564-1.996-.18-.33-.008-.517.164-.725.172-.207.391-.484.564-.69.172-.207.237-.395.346-.623.109-.228.051-.42-.038-.58-.088-.16-.79-.505-.987-.753-.197-.248-.337-.306-.574-.306-.237 0-.491-.019-.745-.019-.254 0-.67.112-.91.395-.24.283-.91.898-.91 2.193 0 1.296.93 2.535 1.06 2.723.13.188 1.83 2.9 4.41 4.148 2.58 1.248 2.58 1.136 3.036 1.058.456-.078 1.47-.6 1.698-1.189.228-.588.228-1.085.15-1.18-.078-.095-.296-.15-.563-.267z"/></svg>
+                        <span>Send Order via WhatsApp</span>
+                    </button>
+                    <div id="error-message" class="mt-4 text-center text-red-600 font-medium hidden">
+                        <!-- Error message will be displayed here -->
+                    </div>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer / Contact Section -->
+    <footer class="bg-primary-purple py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-white">
+            <div class="grid md:grid-cols-3 gap-8 text-center">
+                <!-- Phone -->
+                <div class="flex flex-col items-center">
+                    <div class="text-3xl text-accent-gold mb-2">📞</div>
+                    <p class="font-semibold text-lg">Call Us Anytime</p>
+                    <a href="tel:+2347030437644" class="text-gray-200 hover:text-accent-gold transition font-bold">+234 703 043 7644</a>
+                </div>
+                <!-- Email -->
+                <div class="flex flex-col items-center">
+                    <div class="text-3xl text-accent-gold mb-2">📧</div>
+                    <p class="font-semibold text-lg">Send an Enquiry</p>
+                    <a href="mailto:errandzonwheelsbyjirola@gmail.com" class="text-gray-200 hover:text-accent-gold transition">errandzonwheelsbyjirola@gmail.com</a>
+                </div>
+                <!-- Location -->
+                <div class="flex flex-col items-center">
+                    <div class="text-3xl text-accent-gold mb-2">📍</div>
+                    <p class="font-semibold text-lg">Head Service Area</p>
+                    <p class="text-gray-300">Ibadan, Oyo State, Nigeria</p>
+                </div>
+            </div>
+
+            <div class="mt-12 pt-8 border-t border-accent-gold/50 text-center">
+                <p class="text-gray-300 text-sm">&copy; <span id="current-year-footer"></span> Errandz on Wheels by Jirola. Professional Dispatch & Errands.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript block that acts as your script.js -->
+    <script>
+        document.getElementById('current-year-footer').textContent = new Date().getFullYear();
+
+        // Mobile Menu Toggle Logic
+        const menuButton = document.getElementById('menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = mobileMenu.querySelectorAll('a');
+
+        function toggleMenu() {
+            mobileMenu.classList.toggle('hidden');
+        }
+
+        menuButton.addEventListener('click', toggleMenu);
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        // WhatsApp Order Form Submission Logic
+        const orderForm = document.getElementById('order-form');
+        const errorMessage = document.getElementById('error-message');
+        const whatsappNumber = "2347030437644"; // Nigeria country code + phone number
+
+        orderForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            errorMessage.classList.add('hidden'); // Clear previous errors
+
+            const name = document.getElementById('customer_name').value.trim();
+            const phone = document.getElementById('phone_number').value.trim();
+            const pickup = document.getElementById('pickup_location').value.trim();
+            const dropoff = document.getElementById('dropoff_location').value.trim();
+            const description = document.getElementById('item_description').value.trim();
+
+            if (!name || !phone || !pickup || !dropoff || !description) {
+                errorMessage.textContent = "Please fill in all required fields to submit your order.";
+                errorMessage.classList.remove('hidden');
+                return;
+            }
+
+            // Construct the WhatsApp message text
+            const message = `
+*--- QUICK DISPATCH ORDER ---*
+
+Hello Errandz on Wheels, I need to place an order.
+
+*Customer Name:* ${name}
+*Contact Phone:* ${phone}
+*Pickup Location:* ${pickup}
+*Drop-off Location:* ${dropoff}
+*Item/Service Details:* ${description}
+
+Thank you.
+            `.trim();
+
+            // Encode the message and create the WhatsApp link
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+
+            // Redirect the user to WhatsApp
+            window.open(whatsappUrl, '_blank');
+        });
+    </script>
+</body>
+</html>
+
